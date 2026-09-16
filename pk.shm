@@ -1,0 +1,61 @@
+#define a x_a
+#define b x_d
+#define pk1(a) a.tmp
+#define pk2(a, b, c, d) awk '{ gsub(/a/, "b"); print }' c > d
+#define pk3(a, b) mv a b
+
+#define psk x_a_psk
+
+function psk() {
+	local c=$1
+	local d=pk1(${c})
+
+	pk2(a,b,${c},${d})
+	pk3(${d},${c})
+}
+
+#undef a
+#undef b
+#undef pk1
+#undef pk2
+#undef pk3
+#undef psk
+
+
+#define pk1(a) [ -f a ]
+#define pk2(a) x_a_psk a
+
+#define psk x_b_psk
+
+function psk() {
+	local a=$1
+
+	if pk1(${a});
+	then
+		pk2(${a})
+	fi
+}
+
+
+#undef pk1
+#undef pk2
+#undef psk
+
+
+#define a **/* **/**/* **/**/**/* **/**/**/**/* **/**/**/**/**/* **/**/**/**/**/**/* **/**/**/**/**/**/**/*
+#define pk(a) x_b_psk a
+
+#define psk x_c_psk
+
+function psk() {
+	for b in a;
+	do
+		pk(${b})
+	done
+}
+
+#undef a
+#undef pk
+#undef psk
+
+x_c_psk

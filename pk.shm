@@ -1,5 +1,5 @@
-#define a x_a
-#define b x_d
+#define a X_DPO
+#define b X_DO
 #define pk1(a) a.tmp
 #define pk2(a, b, c, d) awk '{ gsub(/a/, "b"); print }' c > d
 #define pk3(a, b) mv a b
